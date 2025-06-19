@@ -441,113 +441,90 @@
     </div>
 
     <script>
-        // Adicionar interatividade aos checkboxes
-        document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const item = this.closest('.checkbox-item');
-                if (this.checked) {
-                    item.classList.add('checked');
-                } else {
-                    item.classList.remove('checked');
-                }
-            });
-        });
-
-        // Função para enviar o formulário
-        document.getElementById('costReductionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Mostrar loading
-            document.getElementById('loading').style.display = 'block';
-            document.querySelector('.submit-btn').style.display = 'none';
-            
-            // Coletar dados do formulário
-            const formData = new FormData(this);
-            
-            // Coletar checkboxes marcados
-            const areas = [];
-            document.querySelectorAll('input[name="areas"]:checked').forEach(checkbox => {
-                areas.push(checkbox.value);
-            });
-            
-            // URL do seu Google Apps Script (você precisa substituir pela URL real)
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwGkCMJFxBzdM9dfXSga8I0GqKAbRLXLrtN5MQZWf0UXgg3C7a_3-XIfiw6ECu8R04V/exec';
-            
-            // Preparar dados para envio usando FormData (melhor compatibilidade)
-            const submitData = new FormData();
-            submitData.append('nome', formData.get('nome') || 'Não informado');
-            submitData.append('cargo', formData.get('cargo') || 'Não informado');
-            submitData.append('setor', formData.get('setor') || 'Não informado');
-            submitData.append('tempo', formData.get('tempo') || 'Não informado');
-            submitData.append('oportunidade', formData.get('oportunidade') || 'Não informado');
-            submitData.append('areas', areas.join(', ') || 'Nenhuma área selecionada');
-            submitData.append('outrasAreas', formData.get('outrasAreas') || 'Não informado');
-            submitData.append('sugestoes', formData.get('sugestoes') || 'Não informado');
-            submitData.append('dataHora', new Date().toLocaleString('pt-BR'));
-            
-            // Enviar usando fetch sem headers customizados
-            fetch(scriptURL, {
-                method: 'POST',
-                body: submitData
-            })
-            .then(response => {
-                // Esconder loading
-                document.getElementById('loading').style.display = 'none';
-                
-                //if (response.ok) {
-                    // Mostrar mensagem de sucesso
-                    document.getElementById('successMessage').style.display = 'block';
-                    // Limpar formulário
-                    this.reset();
-                    // Remover classes checked dos checkboxes
-                    document.querySelectorAll('.checkbox-item').forEach(item => {
-                        item.classList.remove('checked');
-                    });
-                //} else {
-                //    throw new Error('Erro na resposta do servidor');
-                //}
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                document.getElementById('loading').style.display = 'none';
-                document.querySelector('.submit-btn').style.display = 'block';
-                
-                // Tentar método alternativo usando redirect
-                //enviarPorRedirect(submitData, scriptURL);
-            });
-        });
-
-        // Método alternativo para envio
-        function enviarPorRedirect(formData, scriptURL) {
-            // Criar um form oculto para envio
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = scriptURL;
-            form.target = '_blank';
-            form.style.display = 'none';
-            
-            // Adicionar todos os dados como campos ocultos
-            for (let [key, value] of formData.entries()) {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = key;
-                input.value = value;
-                form.appendChild(input);
+    // Adicionar interatividade aos checkboxes
+    document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const item = this.closest('.checkbox-item');
+            if (this.checked) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
             }
-            
-            document.body.appendChild(form);
-            form.submit();
-            document.body.removeChild(form);
-            
-            // Mostrar mensagem de sucesso após um delay
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'block';
-                document.getElementById('costReductionForm').reset();
-                document.querySelectorAll('.checkbox-item').forEach(item => {
-                    item.classList.remove('checked');
-                });
-            }, 1000);
+        });
+    });
+
+    // Função para enviar o formulário
+    document.getElementById('costReductionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Mostrar loading
+        document.getElementById('loading').style.display = 'block';
+        document.querySelector('.submit-btn').style.display = 'none';
+
+        // Coletar checkboxes marcados e adicioná-los como um campo oculto temporário
+        const areas = [];
+        document.querySelectorAll('input[name="areas"]:checked').forEach(checkbox => {
+            areas.push(checkbox.value);
+        });
+
+        // Criar um input oculto para "areas" antes de submitar o formulário
+        let areasInput = document.createElement('input');
+        areasInput.type = 'hidden';
+        areasInput.name = 'areas';
+        areasInput.value = areas.join(', ');
+        this.appendChild(areasInput);
+
+        // Adicionar data e hora atuais
+        let dataHoraInput = document.createElement('input');
+        dataHoraInput.type = 'hidden';
+        dataHoraInput.name = 'dataHora';
+        dataHoraInput.value = new Date().toLocaleString('pt-BR');
+        this.appendChild(dataHoraInput);
+
+        // URL do seu Google Apps Script
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGkCMJFxBzdM9dfXSga8I0GqKAbRLXLrtN5MQZWf0UXgg3C3a_3-XIfiw6ECu8R04V/exec'; // Verifique se esta URL está correta. A do seu erro tinha '6ECu8R04V/exec', a sua no código é '6ECu8R04V/exec'. Certifique-se de que é a correta.
+
+        // Criar um iframe oculto para submeter o formulário
+        const iframeName = 'hidden_iframe';
+        let iframe = document.getElementById(iframeName);
+        if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.name = iframeName;
+            iframe.id = iframeName;
+            iframe.style.display = 'none'; // Manter o iframe oculto
+            document.body.appendChild(iframe);
         }
-    </script>
+
+        // Atribuir o target do formulário para o iframe
+        this.target = iframeName;
+        this.action = scriptURL;
+        this.method = 'POST'; // Garantir que o método é POST
+
+        // Escutar o evento de carregamento do iframe
+        iframe.onload = function() {
+            // Esconder loading
+            document.getElementById('loading').style.display = 'none';
+
+            // Mostrar mensagem de sucesso
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Limpar formulário e remover classes checked
+            document.getElementById('costReductionForm').reset();
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                item.classList.remove('checked');
+            });
+
+            // Remover os inputs ocultos temporários
+            document.getElementById('costReductionForm').removeChild(areasInput);
+            document.getElementById('costReductionForm').removeChild(dataHoraInput);
+
+            // Re-exibir o botão de envio
+            document.querySelector('.submit-btn').style.display = 'block';
+        };
+
+        // Enviar o formulário
+        this.submit();
+    });
+</script>
 </body>
 </html>
