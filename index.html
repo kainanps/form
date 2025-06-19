@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugestões para Redução de Custos no Hospital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-50px) translateY(-50px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-container {
+            padding: 40px 30px;
+        }
+
+        .form-block {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 15px;
+            border-left: 5px solid #2c5aa0;
+            transition: all 0.3s ease;
+        }
+
+        .form-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .block-title {
+            font-size: 1.4em;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2c5aa0;
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-item:hover {
+            border-color: #2c5aa0;
+            transform: translateY(-1px);
+        }
+
+        .radio-item input[type="radio"] {
+            margin: 0;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #2c5aa0;
+            transform: translateY(-1px);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin: 0;
+            transform: scale(1.2);
+        }
+
+        .checkbox-item.checked {
+            background: #eff6ff;
+            border-color: #2c5aa0;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+            color: white;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 40px auto 0;
+            min-width: 200px;
+            box-shadow: 0 10px 25px rgba(44, 90, 160, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(44, 90, 160, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .footer-message {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.1em;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2c5aa0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            background: #d1fae5;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #34d399;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .form-block {
+                padding: 20px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💡 Sugestões para Redução de Custos</h1>
+            <p>Sua participação é fundamental para otimizar nossos recursos hospitalares</p>
+        </div>
+
+        <div class="form-container">
+            <form id="costReductionForm">
+                <!-- Bloco 1 - Dados do Respondente -->
+                <div class="form-block">
+                    <h2 class="block-title">📋 Dados do Respondente (opcional)</h2>
+                    
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cargo">Cargo/Função:</label>
+                        <input type="text" id="cargo" name="cargo" placeholder="Seu cargo ou função">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="setor">Setor:</label>
+                        <input type="text" id="setor" name="setor" placeholder="Setor onde trabalha">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tempo de atuação no hospital:</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="tempo1" name="tempo" value="Menos de 1 ano">
+                                <label for="tempo1">Menos de 1 ano</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="tempo2" name="tempo" value="1 a 3 anos">
+                                <label for="tempo2">1 a 3 anos</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="tempo3" name="tempo" value="3 a 5 anos">
+                                <label for="tempo3">3 a 5 anos</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="tempo4" name="tempo" value="Mais de 5 anos">
+                                <label for="tempo4">Mais de 5 anos</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloco 2 - Percepção de Oportunidades -->
+                <div class="form-block">
+                    <h2 class="block-title">🔍 Percepção de Oportunidades de Economia</h2>
+                    
+                    <div class="form-group">
+                        <label>Você percebe oportunidades de redução de custos no seu setor?</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="oportunidade1" name="oportunidade" value="Sim" required>
+                                <label for="oportunidade1">Sim</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="oportunidade2" name="oportunidade" value="Não" required>
+                                <label for="oportunidade2">Não</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="oportunidade3" name="oportunidade" value="Não sei dizer" required>
+                                <label for="oportunidade3">Não sei dizer</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Em quais áreas você identifica oportunidades de redução de custos? (Pode marcar mais de uma opção)</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area1" name="areas" value="Consumo de materiais">
+                                <label for="area1">Consumo de materiais</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area2" name="areas" value="Medicamentos">
+                                <label for="area2">Medicamentos</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area3" name="areas" value="Procedimentos / exames">
+                                <label for="area3">Procedimentos / exames</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area4" name="areas" value="Energia elétrica / água">
+                                <label for="area4">Energia elétrica / água</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area5" name="areas" value="Gases">
+                                <label for="area5">Gases</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area6" name="areas" value="Tempo/processos (retrabalho, ineficiência)">
+                                <label for="area6">Tempo/processos (retrabalho, ineficiência)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area7" name="areas" value="Dimensionamento de pessoal">
+                                <label for="area7">Dimensionamento de pessoal</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area8" name="areas" value="Contratos de terceiros">
+                                <label for="area8">Contratos de terceiros</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="area9" name="areas" value="Equipamentos">
+                                <label for="area9">Equipamentos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="outrasAreas">Outras áreas (especificar):</label>
+                        <input type="text" id="outrasAreas" name="outrasAreas" placeholder="Descreva outras áreas não listadas acima">
+                    </div>
+                </div>
+
+                <!-- Bloco 3 - Sugestões -->
+                <div class="form-block">
+                    <h2 class="block-title">💡 Suas Sugestões</h2>
+                    
+                    <div class="form-group">
+                        <label for="sugestoes">Por favor, descreva sua(s) sugestão(ões) para redução de custos no seu setor:</label>
+                        <textarea id="sugestoes" name="sugestoes" placeholder="Descreva detalhadamente suas ideias para redução de custos. Seja específico sobre como implementar e quais benefícios espera alcançar." required></textarea>
+                    </div>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Enviando sua sugestão...</p>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    <h3>✅ Sugestão enviada com sucesso!</h3>
+                    <p>Obrigado por contribuir com ideias para redução de custos. Sua sugestão foi registrada e será analisada.</p>
+                </div>
+
+                <button type="submit" class="submit-btn">🚀 Enviar Sugestão</button>
+            </form>
+
+            <div class="footer-message">
+                <strong>🎯 Agradecemos sua participação!</strong><br>
+                As melhores ideias poderão fazer parte de um plano institucional de redução de custos e quem sabe… até serem reconhecidas publicamente!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Adicionar interatividade aos checkboxes
+        document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const item = this.closest('.checkbox-item');
+                if (this.checked) {
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+        });
+
+        // Função para enviar o formulário
+        document.getElementById('costReductionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Mostrar loading
+            document.getElementById('loading').style.display = 'block';
+            document.querySelector('.submit-btn').style.display = 'none';
+            
+            // Coletar dados do formulário
+            const formData = new FormData(this);
+            
+            // Coletar checkboxes marcados
+            const areas = [];
+            document.querySelectorAll('input[name="areas"]:checked').forEach(checkbox => {
+                areas.push(checkbox.value);
+            });
+            
+            // URL do seu Google Apps Script (você precisa substituir pela URL real)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwGkCMJFxBzdM9dfXSga8I0GqKAbRLXLrtN5MQZWf0UXgg3C7a_3-XIfiw6ECu8R04V/exec';
+            
+            // Preparar dados para envio usando FormData (melhor compatibilidade)
+            const submitData = new FormData();
+            submitData.append('nome', formData.get('nome') || 'Não informado');
+            submitData.append('cargo', formData.get('cargo') || 'Não informado');
+            submitData.append('setor', formData.get('setor') || 'Não informado');
+            submitData.append('tempo', formData.get('tempo') || 'Não informado');
+            submitData.append('oportunidade', formData.get('oportunidade') || 'Não informado');
+            submitData.append('areas', areas.join(', ') || 'Nenhuma área selecionada');
+            submitData.append('outrasAreas', formData.get('outrasAreas') || 'Não informado');
+            submitData.append('sugestoes', formData.get('sugestoes') || 'Não informado');
+            submitData.append('dataHora', new Date().toLocaleString('pt-BR'));
+            
+            // Enviar usando fetch sem headers customizados
+            fetch(scriptURL, {
+                method: 'POST',
+                body: submitData
+            })
+            .then(response => {
+                // Esconder loading
+                document.getElementById('loading').style.display = 'none';
+                
+                if (response.ok) {
+                    // Mostrar mensagem de sucesso
+                    document.getElementById('successMessage').style.display = 'block';
+                    // Limpar formulário
+                    this.reset();
+                    // Remover classes checked dos checkboxes
+                    document.querySelectorAll('.checkbox-item').forEach(item => {
+                        item.classList.remove('checked');
+                    });
+                } else {
+                    throw new Error('Erro na resposta do servidor');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.querySelector('.submit-btn').style.display = 'block';
+                
+                // Tentar método alternativo usando redirect
+                //enviarPorRedirect(submitData, scriptURL);
+            });
+        });
+
+        // Método alternativo para envio
+        function enviarPorRedirect(formData, scriptURL) {
+            // Criar um form oculto para envio
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = scriptURL;
+            form.target = '_blank';
+            form.style.display = 'none';
+            
+            // Adicionar todos os dados como campos ocultos
+            for (let [key, value] of formData.entries()) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                form.appendChild(input);
+            }
+            
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+            
+            // Mostrar mensagem de sucesso após um delay
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('costReductionForm').reset();
+                document.querySelectorAll('.checkbox-item').forEach(item => {
+                    item.classList.remove('checked');
+                });
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
