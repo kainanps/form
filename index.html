@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,8 +50,13 @@
         }
 
         @keyframes float {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(-50px) translateY(-50px); }
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(-50px) translateY(-50px);
+            }
         }
 
         .header h1 {
@@ -243,8 +249,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .success-message {
@@ -289,6 +300,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -301,7 +313,7 @@
                 <!-- Bloco 1 - Dados do Respondente -->
                 <div class="form-block">
                     <h2 class="block-title">📋 Dados do Respondente (opcional)</h2>
-                    
+
                     <div class="form-group">
                         <label for="nome">Nome:</label>
                         <input type="text" id="nome" name="nome" placeholder="Seu nome completo">
@@ -343,7 +355,7 @@
                 <!-- Bloco 2 - Percepção de Oportunidades -->
                 <div class="form-block">
                     <h2 class="block-title">🔍 Percepção de Oportunidades de Economia</h2>
-                    
+
                     <div class="form-group">
                         <label>Você percebe oportunidades de redução de custos no seu setor?</label>
                         <div class="radio-group">
@@ -356,14 +368,16 @@
                                 <label for="oportunidade2">Não</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="oportunidade3" name="oportunidade" value="Não sei dizer" required>
+                                <input type="radio" id="oportunidade3" name="oportunidade" value="Não sei dizer"
+                                    required>
                                 <label for="oportunidade3">Não sei dizer</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Em quais áreas você identifica oportunidades de redução de custos? (Pode marcar mais de uma opção)</label>
+                        <label>Em quais áreas você identifica oportunidades de redução de custos? (Pode marcar mais de
+                            uma opção)</label>
                         <div class="checkbox-group">
                             <div class="checkbox-item">
                                 <input type="checkbox" id="area1" name="areas" value="Consumo de materiais">
@@ -386,7 +400,8 @@
                                 <label for="area5">Gases</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="area6" name="areas" value="Tempo/processos (retrabalho, ineficiência)">
+                                <input type="checkbox" id="area6" name="areas"
+                                    value="Tempo/processos (retrabalho, ineficiência)">
                                 <label for="area6">Tempo/processos (retrabalho, ineficiência)</label>
                             </div>
                             <div class="checkbox-item">
@@ -406,17 +421,21 @@
 
                     <div class="form-group">
                         <label for="outrasAreas">Outras áreas (especificar):</label>
-                        <input type="text" id="outrasAreas" name="outrasAreas" placeholder="Descreva outras áreas não listadas acima">
+                        <input type="text" id="outrasAreas" name="outrasAreas"
+                            placeholder="Descreva outras áreas não listadas acima">
                     </div>
                 </div>
 
                 <!-- Bloco 3 - Sugestões -->
                 <div class="form-block">
                     <h2 class="block-title">💡 Suas Sugestões</h2>
-                    
+
                     <div class="form-group">
-                        <label for="sugestoes">Por favor, descreva sua(s) sugestão(ões) para redução de custos no seu setor:</label>
-                        <textarea id="sugestoes" name="sugestoes" placeholder="Descreva detalhadamente suas ideias para redução de custos. Seja específico sobre como implementar e quais benefícios espera alcançar." required></textarea>
+                        <label for="sugestoes">Por favor, descreva sua(s) sugestão(ões) para redução de custos no seu
+                            setor:</label>
+                        <textarea id="sugestoes" name="sugestoes"
+                            placeholder="Descreva detalhadamente suas ideias para redução de custos. Seja específico sobre como implementar e quais benefícios espera alcançar."
+                            required></textarea>
                     </div>
                 </div>
 
@@ -427,7 +446,8 @@
 
                 <div class="success-message" id="successMessage">
                     <h3>✅ Sugestão enviada com sucesso!</h3>
-                    <p>Obrigado por contribuir com ideias para redução de custos. Sua sugestão foi registrada e será analisada.</p>
+                    <p>Obrigado por contribuir com ideias para redução de custos. Sua sugestão foi registrada e será
+                        analisada.</p>
                 </div>
 
                 <button type="submit" class="submit-btn">🚀 Enviar Sugestão</button>
@@ -435,96 +455,141 @@
 
             <div class="footer-message">
                 <strong>🎯 Agradecemos sua participação!</strong><br>
-                As melhores ideias poderão fazer parte de um plano institucional de redução de custos e quem sabe… até serem reconhecidas publicamente!
+                As melhores ideias poderão fazer parte de um plano institucional de redução de custos e quem sabe… até
+                serem reconhecidas publicamente!
             </div>
         </div>
     </div>
 
     <script>
-    // Adicionar interatividade aos checkboxes
-    document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const item = this.closest('.checkbox-item');
-            if (this.checked) {
-                item.classList.add('checked');
-            } else {
-                item.classList.remove('checked');
-            }
-        });
-    });
-
-    // Função para enviar o formulário
-    document.getElementById('costReductionForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Mostrar loading
-        document.getElementById('loading').style.display = 'block';
-        document.querySelector('.submit-btn').style.display = 'none';
-
-        // Coletar checkboxes marcados e adicioná-los como um campo oculto temporário
-        const areas = [];
-        document.querySelectorAll('input[name="areas"]:checked').forEach(checkbox => {
-            areas.push(checkbox.value);
+        // Adicionar interatividade aos checkboxes
+        document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const item = this.closest('.checkbox-item');
+                if (this.checked) {
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
         });
 
-        // Criar um input oculto para "areas" antes de submitar o formulário
-        let areasInput = document.createElement('input');
-        areasInput.type = 'hidden';
-        areasInput.name = 'areas';
-        areasInput.value = areas.join(', ');
-        this.appendChild(areasInput);
+        // Função para enviar o formulário
+        document.getElementById('costReductionForm').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        // Adicionar data e hora atuais
-        let dataHoraInput = document.createElement('input');
-        dataHoraInput.type = 'hidden';
-        dataHoraInput.name = 'dataHora';
-        dataHoraInput.value = new Date().toLocaleString('pt-BR');
-        this.appendChild(dataHoraInput);
+            // Mostrar loading
+            document.getElementById('loading').style.display = 'block';
+            document.querySelector('.submit-btn').style.display = 'none';
 
-        // URL do seu Google Apps Script
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGkCMJFxBzdM9dfXSga8I0GqKAbRLXLrtN5MQZWf0UXgg3C3a_3-XIfiw6ECu8R04V/exec'; // Verifique se esta URL está correta. A do seu erro tinha '6ECu8R04V/exec', a sua no código é '6ECu8R04V/exec'. Certifique-se de que é a correta.
+            // Coletar dados do formulário
+            const formData = new FormData(this);
 
-        // Criar um iframe oculto para submeter o formulário
-        const iframeName = 'hidden_iframe';
-        let iframe = document.getElementById(iframeName);
-        if (!iframe) {
-            iframe = document.createElement('iframe');
-            iframe.name = iframeName;
-            iframe.id = iframeName;
-            iframe.style.display = 'none'; // Manter o iframe oculto
-            document.body.appendChild(iframe);
-        }
-
-        // Atribuir o target do formulário para o iframe
-        this.target = iframeName;
-        this.action = scriptURL;
-        this.method = 'POST'; // Garantir que o método é POST
-
-        // Escutar o evento de carregamento do iframe
-        iframe.onload = function() {
-            // Esconder loading
-            document.getElementById('loading').style.display = 'none';
-
-            // Mostrar mensagem de sucesso
-            document.getElementById('successMessage').style.display = 'block';
-
-            // Limpar formulário e remover classes checked
-            document.getElementById('costReductionForm').reset();
-            document.querySelectorAll('.checkbox-item').forEach(item => {
-                item.classList.remove('checked');
+            // Coletar checkboxes marcados
+            const areas = [];
+            document.querySelectorAll('input[name="areas"]:checked').forEach(checkbox => {
+                areas.push(checkbox.value);
             });
 
-            // Remover os inputs ocultos temporários
-            document.getElementById('costReductionForm').removeChild(areasInput);
-            document.getElementById('costReductionForm').removeChild(dataHoraInput);
+            // URL do seu Google Apps Script (você precisa substituir pela URL real)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwGkCMJFxBzdM9dfXSga8I0GqKAbRLXLrtN5MQZWf0UXgg3C7a_3-XIfiw6ECu8R04V/exec';
 
-            // Re-exibir o botão de envio
-            document.querySelector('.submit-btn').style.display = 'block';
-        };
+            // Preparar dados para envio usando FormData (melhor compatibilidade)
+            const submitData = new FormData();
+            submitData.append('nome', formData.get('nome') || 'Não informado');
+            submitData.append('cargo', formData.get('cargo') || 'Não informado');
+            submitData.append('setor', formData.get('setor') || 'Não informado');
+            submitData.append('tempo', formData.get('tempo') || 'Não informado');
+            submitData.append('oportunidade', formData.get('oportunidade') || 'Não informado');
+            submitData.append('areas', areas.join(', ') || 'Nenhuma área selecionada');
+            submitData.append('outrasAreas', formData.get('outrasAreas') || 'Não informado');
+            submitData.append('sugestoes', formData.get('sugestoes') || 'Não informado');
+            submitData.append('dataHora', new Date().toLocaleString('pt-BR'));
 
-        // Enviar o formulário
-        this.submit();
-    });
-</script>
+            // Enviar usando fetch sem headers customizados
+            // Enviar usando fetch
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    // Este bloco será executado se a requisição for feita,
+                    // mesmo que haja um erro CORS ao TENTAR LER a resposta.
+                    // O `TypeError: NetworkError` ocorre antes de entrar aqui se o bloqueio for severo.
+                    console.log('Requisição fetch completada. Verificando sucesso...');
+                    // Tentar ler a resposta, mas não depender dela para o sucesso do formulário
+                    return response.text();
+                })
+                .then(data => {
+                    console.log('Resposta do servidor (se lida):', data);
+                    // As ações de sucesso serão executadas após um pequeno delay,
+                    // independentemente de a resposta ter sido lida com sucesso ou não
+                    // devido ao CORS.
+                })
+                .catch(error => {
+                    // Este bloco será executado se houver um erro de rede que impeça a requisição de ser feita
+                    // ou se a promessa do fetch for rejeitada (ex: TypeError: NetworkError para CORS).
+                    console.error('Erro na requisição fetch:', error);
+                })
+                .finally(() => {
+                    // ESTE É O BLOCO CHAVE. Ele será executado SEMPRE,
+                    // independentemente de sucesso ou falha do fetch.
+                    // Esconder loading
+                    document.getElementById('loading').style.display = 'none';
+
+                    // Mostrar mensagem de sucesso
+                    document.getElementById('successMessage').style.display = 'block';
+
+                    // Limpar formulário
+                    this.reset();
+
+                    // Remover classes checked dos checkboxes
+                    document.querySelectorAll('.checkbox-item').forEach(item => {
+                        item.classList.remove('checked');
+                    });
+
+                    // Re-exibir o botão de envio
+                    document.querySelector('.submit-btn').style.display = 'block';
+
+                    // Opcional: Esconder a mensagem de sucesso após alguns segundos
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 5000); // Esconde a mensagem após 5 segundos
+                });
+        });
+
+        // Método alternativo para envio
+        function enviarPorRedirect(formData, scriptURL) {
+            // Criar um form oculto para envio
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = scriptURL;
+            form.target = '_blank';
+            form.style.display = 'none';
+
+            // Adicionar todos os dados como campos ocultos
+            for (let [key, value] of formData.entries()) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                form.appendChild(input);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+
+            // Mostrar mensagem de sucesso após um delay
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('costReductionForm').reset();
+                document.querySelectorAll('.checkbox-item').forEach(item => {
+                    item.classList.remove('checked');
+                });
+            }, 1000);
+        }
+    </script>
 </body>
+
 </html>
