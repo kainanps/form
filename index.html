@@ -494,7 +494,7 @@
                 // Esconder loading
                 document.getElementById('loading').style.display = 'none';
                 
-                if (response.ok) {
+                //if (response.ok) {
                     // Mostrar mensagem de sucesso
                     document.getElementById('successMessage').style.display = 'block';
                     // Limpar formulário
@@ -503,9 +503,9 @@
                     document.querySelectorAll('.checkbox-item').forEach(item => {
                         item.classList.remove('checked');
                     });
-                } else {
-                    throw new Error('Erro na resposta do servidor');
-                }
+                //} else {
+                //    throw new Error('Erro na resposta do servidor');
+                //}
             })
             .catch(error => {
                 console.error('Erro:', error);
@@ -513,7 +513,7 @@
                 document.querySelector('.submit-btn').style.display = 'block';
                 
                 // Tentar método alternativo usando redirect
-                enviarPorRedirect(submitData, scriptURL);
+                //enviarPorRedirect(submitData, scriptURL);
             });
         });
 
