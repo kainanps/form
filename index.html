@@ -491,7 +491,7 @@
                 areas.push(checkbox.value);
             });
 
-            const areasSelecionadas = areas.join('+ ')
+            const areasSelecionadas = areas.join(', ')
 
             // URL do seu Google Apps Script (você precisa substituir pela URL real)
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwGkCMJFxBzdM9dfXSga8I0GqKAbRLXLrtN5MQZWf0UXgg3C7a_3-XIfiw6ECu8R04V/exec';
@@ -513,7 +513,7 @@
             // Enviar usando fetch
             fetch(scriptURL, {
                 method: 'POST',
-                body: formData
+                body: submitData
             })
                 .then(response => {
                     // Este bloco será executado se a requisição for feita,
