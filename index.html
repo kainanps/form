@@ -491,6 +491,8 @@
                 areas.push(checkbox.value);
             });
 
+            const areasSelecionadas = areas.join('+ ')
+
             // URL do seu Google Apps Script (você precisa substituir pela URL real)
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwGkCMJFxBzdM9dfXSga8I0GqKAbRLXLrtN5MQZWf0UXgg3C7a_3-XIfiw6ECu8R04V/exec';
 
@@ -501,12 +503,12 @@
             submitData.append('setor', formData.get('setor') || 'Não informado');
             submitData.append('tempo', formData.get('tempo') || 'Não informado');
             submitData.append('oportunidade', formData.get('oportunidade') || 'Não informado');
-            submitData.append('areas', areas.join('- ') || 'Nenhuma área selecionada');
+            submitData.append('areas', areasSelecionadas || 'Nenhuma área selecionada');
             submitData.append('outrasAreas', formData.get('outrasAreas') || 'Não informado');
             submitData.append('sugestoes', formData.get('sugestoes') || 'Não informado');
             submitData.append('dataHora', new Date().toLocaleString('pt-BR'));
 
-            console.log(areas.join(', '))
+            console.log(areasSelecionadas)
             // Enviar usando fetch sem headers customizados
             // Enviar usando fetch
             fetch(scriptURL, {
