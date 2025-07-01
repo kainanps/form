@@ -501,7 +501,7 @@
             submitData.append('setor', formData.get('setor') || 'Não informado');
             submitData.append('tempo', formData.get('tempo') || 'Não informado');
             submitData.append('oportunidade', formData.get('oportunidade') || 'Não informado');
-            submitData.append('areas', areas.join(', ') || 'Nenhuma área selecionada');
+            submitData.append('areas', areas.join('- ') || 'Nenhuma área selecionada');
             submitData.append('outrasAreas', formData.get('outrasAreas') || 'Não informado');
             submitData.append('sugestoes', formData.get('sugestoes') || 'Não informado');
             submitData.append('dataHora', new Date().toLocaleString('pt-BR'));
